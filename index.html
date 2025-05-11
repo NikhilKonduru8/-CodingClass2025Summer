@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Coding Class for Middle Schoolers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@latest"></script>
+    <style>
+        /* Custom styles for animations and overall appearance */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .slide-in-left {
+            animation: slideInLeft 1s ease-in-out;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .slide-in-right {
+            animation: slideInRight 1s ease-in-out;
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .hackathon-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            height: 100%; /* Ensure cards are same height */
+        }
+        .hackathon-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* New color scheme */
+        .primary-color {
+             background-image: linear-gradient(to bottom right, #4F46E5, #6366F1);
+        }
+        .secondary-color {
+            background-color: rgba(100, 116, 139, 0.7);
+        }
+        .text-primary {
+            color: #F9FAFB;
+        }
+        .text-secondary {
+            color: #E5E7EB;
+        }
+
+        /* Improved button styles */
+        .nav-link {
+            color: #E5E7EB;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #F9FAFB;
+        }
+        .active-nav-link {
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        /* Scroll reveal styles */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-in-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* New styles for intro section */
+        #intro-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 0;
+            background-image: linear-gradient(to bottom, rgba(79, 70, 229, 0.7), rgba(100, 116, 139, 0.1));
+            height: 80vh;
+        }
+        #intro-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 1s ease-in-out, fadeIn 1s ease-in-out;
+        }
+        #intro-section p {
+            font-size: 1.2rem;
+            color: #F3F4F6;
+            max-width: 700px;
+            margin-bottom: 0;
+            line-height: 1.7;
+            opacity: 0.8;
+            animation: fadeIn 1s ease-in-out 0.5s;
+        }
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* Button styles */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            background-image: linear-gradient(to right, #6D28D9, #8B5CF6);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+            cursor: pointer;
+            border: none;
+        }
+        .cta-button:hover {
+            background-image: linear-gradient(to right, #4C1D95, #6B21A8);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        .cta-button:active {
+            transform: translateY(0) scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Highlight styles */
+        .highlighted {
+            background-color: rgba(252, 211, 77, 0.8);
+            color: #1e293b;
+            padding: 0.2em 0.4em;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin: 0 0.25rem;
+        }
+
+        /* Variation Styles */
+        #about {
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+            border-left: 4px solid #8b5cf6;
+        }
+        #curriculum {
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-right: 4px solid #8b5cf6;
+        }
+        #hackathons {
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+            border-left: 4px solid #8b5cf6;
+        }
+        #instructor {
+             background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+             border-right: 4px solid #8b5cf6;
+        }
+        #details {
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+            border-left: 4px solid #8b5cf6;
+        }
+
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 to-black min-h-screen flex flex-col">
+    <header class="bg-white/10 backdrop-blur-md py-4 px-6 rounded-b-lg shadow-md sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-semibold text-white fade-in">Python Coding Class</h1>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#about" class="nav-link text-lg">About</a></li>
+                    <li><a href="#curriculum" class="nav-link text-lg">Curriculum</a></li>
+                    <li><a href="#hackathons" class="nav-link text-lg">Hackathons</a></li>
+                    <li><a href="#instructor" class="nav-link text-lg">Instructor</a></li>
+                    <li><a href="#details" class="nav-link text-lg">Details</a></li>
+                </ul>
+            </nav>
+            <button id="hamburger-btn" class="md:hidden text-white focus:outline-none" aria-label="Toggle Navigation">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-gray-900/90 z-20">
+        <div class="bg-gray-800 w-80 h-full absolute right-0 p-6">
+            <div class="flex justify-end mb-4">
+                <button id="close-menu-btn" class="text-white focus:outline-none" aria-label="Close Menu">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <nav class="block">
+                <ul class="space-y-4">
+                    <li><a href="#about" class="block text-lg text-gray-200 hover:text-white transition duration-300">About</a></li>
+                    <li><a href="#curriculum" class="block text-lg text-gray-200 hover:text-white transition duration-300">Curriculum</a></li>
+                    <li><a href="#hackathons" class="block text-lg text-gray-200 hover:text-white transition duration-300">Hackathons</a></li>
+                     <li><a href="#instructor" class="block text-lg text-gray-200 hover:text-white transition duration-300">Instructor</a></li>
+                    <li><a href="#details" class="block text-lg text-gray-200 hover:text-white transition duration-300">Details</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container mx-auto py-10 flex-grow flex flex-col gap-8">
+        <section id="intro-section" class="reveal">
+            <h1 class="fade-in">Python Coding Class</h1>
+            <p class="fade-in">
+                Unlock your coding potential with our <span class="highlighted">beginner-friendly</span> Python course, designed for middle schoolers! Learn the fundamentals and build amazing projects.
+            </p>
+            <a href="https://forms.gle/xigzzqS2VtwTDaKs7" target="_blank" class="cta-button">Sign Up</a>
+        </section>
+
+        <section id="about" class="bg-white/10 backdrop-blur-md rounded-lg shadow-lg p-6 text-primary reveal">
+            <h2 class="text-3xl font-semibold mb-4">About the Class</h2>
+            <p class="text-lg">
+                Welcome to our Python coding class, designed specifically for <span class="highlighted">middle schoolers</span> who are curious about the world of programming! This course is perfect for beginners. We'll start with the very basics and guide you through creating your own projects. Learn to code from <span class="highlighted">anywhere</span> with our Zoom sessions!
+            </p>
+        </section>
+
+        <section id="curriculum" class="bg-white/10 backdrop-blur-md rounded-lg shadow-lg p-6 text-primary reveal">
+            <h2 class="text-3xl font-semibold mb-4">Curriculum</h2>
+            <p class="text-lg mb-4">
+                We'll cover the fundamentals of Python programming, including:
+            </p>
+            <ul class="list-disc list-inside text-lg space-y-2">
+                <li><span class="font-semibold">Strings:</span> Learn how to work with text in Python.</li>
+                <li><span class="font-semibold">Loops:</span> Discover how to repeat actions using for and while loops.</li>
+                <li><span class="font-semibold">Functions:</span> Create reusable blocks of code.</li>
+                <li><span class="font-semibold">Beginning Classes:</span> Get an introduction to object-oriented programming.</li>
+            </ul>
+            <p class="text-lg mt-4">
+                The class will culminate in a final project where you can showcase your new skills!
+            </p>
+        </section>
+
+        <section id="hackathons" class="bg-white/10 backdrop-blur-md rounded-lg shadow-lg p-6 text-primary reveal">
+            <h2 class="text-3xl font-semibold mb-6 text-center">Hackathons</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="hackathon-card bg-gray-800 rounded-lg shadow-md p-4 flex flex-col items-center">
+                    <h3 class="text-xl font-semibold mb-2 text-white">NASA Space Apps</h3>
+                    <div class="w-full h-32 bg-gray-700 rounded-md mb-4 flex items-center justify-center">
+                        <span class="text-gray-400">Image Placeholder</span>
+                    </div>
+                    <p class="text-gray-300 text-sm text-center">Details about NASA Space Apps...</p>
+                </div>
+                <div class="hackathon-card bg-gray-800 rounded-lg shadow-md p-4 flex flex-col items-center">
+                    <h3 class="text-xl font-semibold mb-2 text-white">Warrior Hacks</h3>
+                    <div class="w-full h-32 bg-gray-700 rounded-md mb-4 flex items-center justify-center">
+                         <span class="text-gray-400">Image Placeholder</span>
+                    </div>
+                    <p class="text-gray-300 text-sm text-center">Details about Warrior Hacks...</p>
+                </div>
+                <div class="hackathon-card bg-gray-800 rounded-lg shadow-md p-4 flex flex-col items-center">
+                    <h3 class="text-xl font-semibold mb-2 text-white">Blus Hacks</h3>
+                    <div class="w-full h-32 bg-gray-700 rounded-md mb-4 flex items-center justify-center">
+                         <span class="text-gray-400">Image Placeholder</span>
+                    </div>
+                    <p class="text-gray-300 text-sm text-center">Details about Blus Hacks...</p>
+                </div>
+                <div class="hackathon-card bg-gray-800 rounded-lg shadow-md p-4 flex flex-col items-center">
+                    <h3 class="text-xl font-semibold mb-2 text-white">Happy Hacks</h3>
+                    <div class="w-full h-32 bg-gray-700 rounded-md mb-4 flex items-center justify-center">
+                         <span class="text-gray-400">Image Placeholder</span>
+                    </div>
+                    <p class="text-gray-300 text-sm text-center">Details about Happy Hacks...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="instructor" class="bg-white/10 backdrop-blur-md rounded-lg shadow-lg p-6 text-primary reveal">
+            <h2 class="text-3xl font-semibold mb-4">About the Instructors</h2>
+            <p class="text-lg">
+                We are two passionate coders with 3+ years of experience. We love sharing our knowledge and helping young minds discover the exciting world of programming. We're excited to guide you on your coding journey!
+            </p>
+        </section>
+
+        <section id="details" class="bg-white/10 backdrop-blur-md rounded-lg shadow-lg p-6 text-primary reveal">
+            <h2 class="text-3xl font-semibold mb-4">Class Details</h2>
+            <ul class="list-disc list-inside text-lg space-y-2">
+                <li><span class="font-semibold">Starting Date:</span> June 15th</li>
+                <li><span class="font-semibold">Platform:</span> Zoom (Learn from anywhere!)</li>
+                <li><span class="font-semibold">Target Audience:</span> Middle schoolers (But anyone is welcome!)</li>
+                <li><span class="font-semibold">What you'll need:</span> A computer and an internet connection.</li>
+            </ul>
+            <a href="https://forms.gle/xigzzqS2VtwTDaKs7" target="_blank" class="cta-button">Sign Up</a>
+        </section>
+    </main>
+
+    <footer class="bg-white/10 backdrop-blur-md py-4 px-6 rounded-t-lg shadow-md text-center text-gray-300">
+        <p>&copy; 2023 Python Coding Class. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const hamburgerBtn = document.getElementById("hamburger-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeMenuBtn = document.getElementById("close-menu-btn");
+        const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section');
+        const headerHeight = document.querySelector('header').offsetHeight;
+
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle("hidden");
+        }
+
+        hamburgerBtn.addEventListener("click", toggleMobileMenu);
+        closeMenuBtn.addEventListener("click", toggleMobileMenu);
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener("click", toggleMobileMenu);
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(event.target) && event.target !== hamburgerBtn) {
+                toggleMobileMenu();
+            }
+        });
+
+        function updateActiveNavLink() {
+            let currentSectionId = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionTop + sectionHeight - 100) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav-link');
+                if (link.getAttribute('href').slice(1) === currentSectionId) {
+                    link.classList.add('active-nav-link');
+                }
+            });
+        }
+        window.addEventListener('scroll', updateActiveNavLink);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href').slice(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    const targetOffsetTop = targetElement.offsetTop - headerHeight;
+                    window.scrollTo({
+                        top: targetOffsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        function revealOnScroll() {
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < window.innerHeight - elementVisible) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+    </script>
+</body>
+</html>
