@@ -177,12 +177,42 @@
             border-left: 4px solid #8b5cf6;
         }
 
+        /* Logo Styles */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem; /* Reduced gap for tighter design */
+        }
+
+        .logo-text {
+            font-size: 2rem; /* Increased size */
+            font-weight: 700; /* Use 700 for the boldest weight */
+            color: #FFFFFF; /* primary color */
+            letter-spacing: -0.05em; /* Slightly tighter letter spacing */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .logo-icon {
+            /* simplified Python icon */
+            width: 1.2em; /* Matched to the font size of the 'P' */
+            height: 1.2em;
+            background-color: #6B7280; /* A darker shade */
+            mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z' fill='%23FFDA64'/%3E%3Cpath d='M12 14C14.2091 14 16 12.2091 16 10C16 7.79086 14.2091 6 12 6C9.79086 6 8 7.79086 8 10C8 12.2091 9.79086 14 12 14Z' fill='%231E293B'/%3E%3C/svg%3E"); /* More compact SVG path */
+            mask-repeat: no-repeat;
+            mask-position: center;
+            background-size: contain;
+            transform: rotate(45deg); /* added rotation */
+        }
+
     </style>
 </head>
 <body class="bg-gradient-to-br from-gray-900 to-black min-h-screen flex flex-col">
     <header class="bg-white/10 backdrop-blur-md py-4 px-6 rounded-b-lg shadow-md sticky top-0 z-10">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-semibold text-white fade-in">Python Coding Class</h1>
+            <div class="logo-container">
+                <div class="logo-icon"></div>
+                <span class="logo-text">Python Class</span>
+            </div>
             <nav class="hidden md:block">
                 <ul class="flex space-x-6">
                     <li><a href="#about" class="nav-link text-lg">About</a></li>
@@ -267,7 +297,7 @@
         <section id="instructor" class="bg-white/10 backdrop-blur-md rounded-lg shadow-lg p-6 text-primary reveal">
             <h2 class="text-3xl font-semibold mb-4">About the Instructors</h2>
             <p class="text-lg">
-                We are two passionate coders with 3+ years of experience. We love sharing our knowledge and helping young minds discover the exciting world of programming. We're excited to guide you on your coding journey!
+                We are two passionate coders with 3+ years of experience. We love sharing our knowledge and helping young minds discover the exciting world of programming.  Beyond this class, we've also taken the initiative to establish and run a coding club at our school.  In this club, we've organized workshops, mentored students in various projects, and fostered a collaborative learning environment. We believe in making coding accessible and fun, and we're excited to bring that same energy to this Python class and guide you on your coding journey!
             </p>
         </section>
 
@@ -311,7 +341,7 @@
     </main>
 
     <footer class="bg-white/10 backdrop-blur-md py-4 px-6 rounded-t-lg shadow-md text-center text-gray-300">
-        <p>&copy; 2025 Python Coding Class. All rights reserved.</p>
+        <p>&copy; 2023 Python Coding Class. All rights reserved.</p>
     </footer>
 
     <script>
